@@ -11,14 +11,18 @@
 #import "PushAnimaton.h"
 #import "UIImage+Color.h"
 #import "Header.h"
+#import "PopAnimation.h"
+#import "SwipeDismiss.h"
 @interface ViewController ()
 <
 UITableViewDataSource,
 UITableViewDelegate,
-UINavigationControllerDelegate
+UINavigationControllerDelegate,
+UIViewControllerTransitioningDelegate
 >
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) SwipeDismiss *swipeDismiss;
 @end
 
 @implementation ViewController
@@ -37,19 +41,10 @@ UINavigationControllerDelegate
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    self.navigationController.delegate = self;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)configNav
 {
+    self.navigationController.delegate = self;
+
     UILabel *label = [[UILabel alloc] init];
     label.text = @"半糖";
     label.textColor = [UIColor whiteColor];
@@ -75,6 +70,9 @@ UINavigationControllerDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OtherViewController *otherVc = [[OtherViewController alloc] init];
+    otherVc.transitioningDelegate = self;
+    [self.swipeDismiss wireToViewController:otherVc];
+    
     [self.navigationController pushViewController:otherVc animated:YES];
 }
 
@@ -89,11 +87,18 @@ UINavigationControllerDelegate
 #pragma mark - UINavigationControllerDelegate
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
 {
-    if ([toVC isKindOfClass:[OtherViewController class]]) {
+    if (operation == UINavigationControllerOperationPush) {
         return [[PushAnimaton alloc] init];
+    }else if (operation == UINavigationControllerOperationPop){
+        return [[PopAnimation alloc] init];
     }else{
         return nil;
     }
+}
+
+- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator
+{
+    return self.swipeDismiss.interacting ? self.swipeDismiss : nil;
 }
 
 - (UITableView *)tableView
@@ -109,5 +114,13 @@ UINavigationControllerDelegate
         _tableView.tableHeaderView = head;
     }
     return _tableView;
+}
+
+- (SwipeDismiss *)swipeDismiss
+{
+    if (!_swipeDismiss) {
+        _swipeDismiss = [[SwipeDismiss alloc] init];
+    }
+    return _swipeDismiss;
 }
 @end

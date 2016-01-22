@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		380631941C522FAA009FC18D /* SwipeDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 380631931C522FAA009FC18D /* SwipeDismiss.m */; };
 		38A3DC771C50BBFE00CCAF50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A3DC761C50BBFE00CCAF50 /* main.m */; };
 		38A3DC7A1C50BBFE00CCAF50 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A3DC791C50BBFE00CCAF50 /* AppDelegate.m */; };
 		38A3DC7D1C50BBFE00CCAF50 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A3DC7C1C50BBFE00CCAF50 /* ViewController.m */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		380631921C522FAA009FC18D /* SwipeDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipeDismiss.h; sourceTree = "<group>"; };
+		380631931C522FAA009FC18D /* SwipeDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipeDismiss.m; sourceTree = "<group>"; };
 		38A3DC721C50BBFE00CCAF50 /* bantangDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bantangDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38A3DC761C50BBFE00CCAF50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		38A3DC781C50BBFE00CCAF50 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				38F65A9D1C5203B8006F6FF5 /* PushAnimaton.m */,
 				38F65A9A1C5203B8006F6FF5 /* PopAnimation.h */,
 				38F65A9B1C5203B8006F6FF5 /* PopAnimation.m */,
+				380631921C522FAA009FC18D /* SwipeDismiss.h */,
+				380631931C522FAA009FC18D /* SwipeDismiss.m */,
 			);
 			path = Animation;
 			sourceTree = "<group>";
@@ -341,6 +346,7 @@
 				38F65AAE1C520CE4006F6FF5 /* UIImage+Color.m in Sources */,
 				38A3DCAA1C50C0B100CCAF50 /* SHNavigationController.m in Sources */,
 				38A3DC771C50BBFE00CCAF50 /* main.m in Sources */,
+				380631941C522FAA009FC18D /* SwipeDismiss.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

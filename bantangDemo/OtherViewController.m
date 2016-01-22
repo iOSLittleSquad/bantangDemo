@@ -25,7 +25,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.navigationController.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,14 +32,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC
-{
-    if ([toVC isKindOfClass:[ViewController class]]) {
-        return [[PopAnimation alloc] init];
-    }else{
-        return nil;
-    }
-}
+
 /*
 #pragma mark - Navigation
 
