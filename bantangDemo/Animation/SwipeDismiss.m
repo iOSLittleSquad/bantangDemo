@@ -10,6 +10,7 @@
 
 @interface SwipeDismiss()
 @property (nonatomic, assign) BOOL shouldComplete;
+
 @property (nonatomic, strong) UIViewController *presentingVC;
 @end
 @implementation SwipeDismiss
@@ -25,7 +26,13 @@
     [view addGestureRecognizer:gesture];
 }
 
+-(CGFloat)completionSpeed
+{
+    return 1 - self.percentComplete;
+}
+
 - (void)pan:(UIPanGestureRecognizer *)pan {
+    
     CGPoint translation = [pan translationInView:pan.view.superview];
     
     switch (pan.state) {
@@ -33,37 +40,35 @@
         {
             self.interacting = YES;
             [self.presentingVC.navigationController popViewControllerAnimated:YES];
-        }
             break;
+        }
         case UIGestureRecognizerStateChanged:
         {
             CGFloat distanse = translation.y / 400.0;
-            distanse = fminf(fmaxf(distanse, 0.0), 1.0);
+            
+            distanse = MIN(MAX(distanse, 0.0), 1.0);
+            
             self.shouldComplete = (distanse > 0.5);
             
             [self updateInteractiveTransition:distanse];
-        }
+            
             break;
+        }
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateCancelled:
         {
             self.interacting = NO;
-            if (!self.shouldComplete || pan.state == UIGestureRecognizerStateCancelled) {
+            if (!self.shouldComplete || (pan.state == UIGestureRecognizerStateCancelled)) {
                 [self cancelInteractiveTransition];
-            }else{
+            } else {
                 [self finishInteractiveTransition];
             }
-            
-        }
             break;
+        }
         default:
             break;
     }
 
 }
 
-- (CGFloat)completionSpeed
-{
-    return 1 - self.percentComplete;
-}
 @end

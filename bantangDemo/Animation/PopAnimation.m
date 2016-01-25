@@ -35,7 +35,7 @@
     [UIView animateWithDuration:timeInterval animations:^{
         fromVc.view.frame = finalFrame;
     } completion:^(BOOL finished) {
-        [transitionContext completeTransition:YES];
+        [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
 }
 

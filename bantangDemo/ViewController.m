@@ -33,6 +33,7 @@ UIViewControllerTransitioningDelegate
     
     [self configNav];
     [self.view addSubview:self.tableView];
+    self.swipeDismiss = [SwipeDismiss new];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -96,8 +97,7 @@ UIViewControllerTransitioningDelegate
     }
 }
 
-- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator
-{
+-(id<UIViewControllerInteractiveTransitioning>)interactionControllerForDismissal:(id<UIViewControllerAnimatedTransitioning>)animator {
     return self.swipeDismiss.interacting ? self.swipeDismiss : nil;
 }
 
@@ -114,13 +114,5 @@ UIViewControllerTransitioningDelegate
         _tableView.tableHeaderView = head;
     }
     return _tableView;
-}
-
-- (SwipeDismiss *)swipeDismiss
-{
-    if (!_swipeDismiss) {
-        _swipeDismiss = [[SwipeDismiss alloc] init];
-    }
-    return _swipeDismiss;
 }
 @end

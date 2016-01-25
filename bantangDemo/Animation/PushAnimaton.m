@@ -39,7 +39,7 @@
                             toVc.view.frame = finalFrame;
     } completion:^(BOOL finished) {
         //5.动画完成后告诉context动画已经完成
-        [transitionContext completeTransition:YES];
+        [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
     }];
 }
 @end
